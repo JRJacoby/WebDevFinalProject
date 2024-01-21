@@ -10,7 +10,7 @@
 1. Looking at your own data shows you everything you could want to know.
 2. Someone else looking at your data shows only a subset of all the data, perhaps customizable based on what you've chosen to share.
 
-**Relevant Spotify API methods**:  
+**Relevant Spotify API methods**:
 1. GET /audio-features/{id}
 2. GET /audio-analysis/{id}
 3. GET /recommendations
@@ -20,7 +20,7 @@
 ## 2. Integration with setlist.fm
 **Description**: Uses Spotify's API and setlist.fm's API to automatically add the setlist for a particular show as a playlist to the user's account. Sometimes people will do this for concerts already and you can just listen to their playlists, but it's harder to find good ones for smaller shows and often they are not organized in a way that makes sense to everyone.
 
-**Main Features**:  
+**Main Features**:
 1. Authenticate with Spotify (if possible and secure) to get list of favorite artists/songs/etc.
 2. Click on any of those artists or songs to see a list of live concerts involving them and the setlist.fm setlist for those concerts
 3. Click 'Add as Playlist' to:
@@ -40,4 +40,34 @@
 5. PUT /playlists/{playlist_id}/tracks
 6. PUT /playlists/{playlist_id}
 
-## 3. 
+**Relevant setlist.fm API methods**:
+1. GET /1.0/search/artists
+2. GET /1.0/search/setlists
+3. GET /1.0/artist/{mbid}
+
+## 3. Democratic Playlists
+**Description**: Allows a large group of people (say, at a party) to democratically control a playlist. Spotify has Collaborative Playlists, but they offer total control to everyone. This is aimed more at friendgroups sharing a playlist over time rather than many strangers sharing a playlist for a short time, like at a party.
+
+**Main Features**:
+1. One device can 'Start a Playlist' and act as the 'playlist server'.
+2. Other devices can connect to that shared playlist and participate in forming it
+3. Some mechanism to keep unwanted devices from connecting (like a code like the Jack-in-the-Box phone games, or physical proximity to other devices connected to the same playlist)
+3. Anybody can add a song to the bottom of the playlist
+4. Anybody can vote songs closer to the top or the bottom of the playlist
+5. An algorithm takes in everyone's input to determine the order of the songs
+6. A majority vote (or a settable number by the server, such as 60% or 70% of members) can delete a song from the playlist
+7. A majority vote (or a settable number by the server, such as 60% or 70% of members) can skip the currently playing song
+
+**Two types of Users**:
+1. The playlist server
+2. Playlist members
+3. (Optional) Playlist guests that can listen but not vote
+
+**Relevant Spotify API Methods**:
+1. POST /users/{user_id}/playlists
+2. POST /playlists/{playlist_id}/tracks
+3. PUT /playlists/{playlist_id}/tracks
+4. PUT /playlists/{playlist_id}
+5. DELETE /playlists/{playlist_id}/tracks
+6. POST /me/player/queue
+7. POST /me/player/next
